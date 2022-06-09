@@ -1,0 +1,190 @@
+.ProfileCard {
+  width: 25%;
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 2.25rem;
+  background: linear-gradient(
+      122.4deg,
+      rgba(219, 182, 89, 0.1) 1.1%,
+      rgba(219, 182, 89, 0) 57%
+    ),
+    #282828;
+  border-radius: 16px;
+}
+
+.ProfileImage {
+  display: inline-flex;
+
+  span {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+
+    div {
+      display: block;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+
+      img {
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding: 0;
+        border: none;
+        margin: auto;
+        display: block;
+        width: 0;
+        height: 0;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
+
+.Profile {
+  p {
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+  }
+}
+
+.Designation {
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  border: 1px solid #dbb659;
+  border-radius: 200px;
+  padding: 0.5rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.ButtonContainer {
+  margin-top: 1.5rem;
+  width: 100%;
+
+  button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    color: white;
+    background: linear-gradient(91.3deg, #dbb659 1.61%, #a97e2a 100%);
+    border-radius: 8px;
+    svg {
+      margin-inline-end: 0.25rem;
+    }
+  }
+}
+
+.Body {
+  margin-top: 1.5rem;
+}
+
+.ContactInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(
+      122.4deg,
+      rgba(219, 182, 89, 0.1) 1.1%,
+      rgba(219, 182, 89, 0) 57%
+    ),
+    #282828;
+  border-radius: 8px;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: linear-gradient(
+    300deg,
+    rgba(219, 182, 89, 0.12) 31.56%,
+    rgba(219, 182, 89, 0.62) 103.79%
+  );
+
+  span {
+    display: flex;
+    align-items: center;
+    color: white;
+    opacity: 0.5;
+    svg {
+      margin-inline-end: 0.5rem;
+    }
+  }
+  p {
+    color: #dbb659;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+
+.SocialLinkContainer {
+  margin-top: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 6px;
+  width: 100%;
+  color: #dbb659;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-inline-start: 3rem;
+  padding-inline-end: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SocialIconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #dbb659 1px solid;
+  width: fit-content;
+  padding: 0.25rem;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .ProfileCard {
+    width: 60%;
+  }
+}
+
+@media (max-width: 425px) {
+  .ProfileCard {
+    width: 90%;
+  }
+  .Header {
+    background: #151515;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .SocialLinkContainer {
+    background: #060606;
+  }
+}
