@@ -13,18 +13,18 @@ import VCard from 'vcard-creator';
 
 const ProfileCard = (props) => {
   const onAddToContactHandler = () => {
-    const myVCard = new VCard();
-    myVCard
-      // Add personal data
-      .addName('Stuart', 'Thomas')
-      // Add work data
-      .addCompany('Billable')
-      .addJobtitle('UI/UX Designer')
-      .addEmail('thomas@stuart.com')
-      .addPhoneNumber('0771231234')
-      .setFilename('StuartThomas');
-    const data = myVCard.buildVCard();
-    window.open('data:text/x-vcard;urlencoded,' + data);
+    // const myVCard = new VCard();
+    // myVCard
+    //   // Add personal data
+    //   .addName('Stuart', 'Thomas')
+    //   // Add work data
+    //   .addCompany('Billable')
+    //   .addJobtitle('UI/UX Designer')
+    //   .addEmail('thomas@stuart.com')
+    //   .addPhoneNumber('0771231234')
+    //   .setFilename('StuartThomas');
+    // const data = myVCard.buildVCard();
+    // window.open('data:text/x-vcard;urlencoded,' + data);
   };
 
   const firstName = props.profileData?.find(
