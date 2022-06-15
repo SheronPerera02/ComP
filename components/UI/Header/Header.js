@@ -19,8 +19,9 @@ const Header = () => {
           className={classes.BtnShare}
           onClick={() => {
             if (!navigator.share) return;
+
             navigator.share({
-              url: 'https://www.youtube.com/',
+              url: window.location.href,
             });
           }}
         >

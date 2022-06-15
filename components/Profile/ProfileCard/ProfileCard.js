@@ -1,7 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import classes from './ProfileCard.module.scss';
-import { MdOutlineLocalPhone, MdOutlineEmail } from 'react-icons/md';
+import {
+  MdOutlineLocalPhone,
+  MdOutlineEmail,
+  MdOutlineStore,
+  MdOutlineLink,
+  MdOutlineLabel,
+} from 'react-icons/md';
 import { IoIosAdd, IoLogoGoogle } from 'react-icons/io';
 import {
   FaFacebookF,
@@ -9,24 +15,11 @@ import {
   FaTwitter,
   FaLinkedinIn,
 } from 'react-icons/fa';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import VCard from 'vcard-creator';
 
 const ProfileCard = (props) => {
-  const onAddToContactHandler = () => {
-    // const myVCard = new VCard();
-    // myVCard
-    //   // Add personal data
-    //   .addName('Stuart', 'Thomas')
-    //   // Add work data
-    //   .addCompany('Billable')
-    //   .addJobtitle('UI/UX Designer')
-    //   .addEmail('thomas@stuart.com')
-    //   .addPhoneNumber('0771231234')
-    //   .setFilename('StuartThomas');
-    // const data = myVCard.buildVCard();
-    // window.open('data:text/x-vcard;urlencoded,' + data);
-  };
-
   const firstName = props.profileData?.find(
     (data) => data.name === 'First Name'
   ).value;
@@ -41,6 +34,16 @@ const ProfileCard = (props) => {
 
   const contactNo = props.profileData?.find(
     (data) => data.name === 'Contact Number'
+  ).value;
+
+  const website = props.profileData?.find(
+    (data) => data.name === 'Website Link'
+  ).value;
+
+  const email = props.profileData?.find((data) => data.name === 'Email').value;
+
+  const company = props.profileData?.find(
+    (data) => data.name === 'Company'
   ).value;
 
   const leaveOutFields = [
@@ -62,8 +65,71 @@ const ProfileCard = (props) => {
     return addField;
   });
 
+  const onAddToContactHandler = () => {
+    const myVCard = new VCard();
+
+    myVCard
+      .addName(lastName, firstName)
+      .addCompany(company)
+      .addJobtitle(designation)
+      .addEmail(email, 'Email')
+      .addPhoneNumber(contactNo, 'CELL')
+      .addURL(website)
+      .setFilename(firstName + lastName);
+
+    const data = myVCard.buildVCard();
+
+    // window.open('data:text/x-vcard;urlencoded,' + data);
+
+    var url = 'data:text/x-vcard;charset=utf-8,' + encodeURIComponent(data);
+
+    // document.location.href = url;
+
+    var downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = `${firstName}_${lastName}.vcf`;
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+  const composeEmail = (value) => {
+    const emailServiceProvider = value.split('@')[1].split('.')[0];
+
+    if (emailServiceProvider === 'gmail') {
+      window.open(
+        'https://mail.google.com/mail/?view=cm&fs=1&to=' + value,
+        '_blank'
+      );
+    } else if (emailServiceProvider === 'yahoo') {
+      window.open('https://compose.mail.yahoo.com/?to=' + value, '_blank');
+    } else {
+      toast('Cannot open custom email!', {
+        position: 'top-center',
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        className: classes.CustomToast,
+      });
+    }
+  };
+
+  const openWebsiteLink = (value) => {
+    const url =
+      value.slice(0, 4) !== 'http' && value.slice(0, 4) !== 'https'
+        ? 'https://' + value
+        : value;
+
+    window.open(url, '_blank');
+  };
+
   return (
     <div className={classes.ProfileCard}>
+      <ToastContainer />
       <div className={classes.Header}>
         <div className={classes.Profile}>
           <div className={classes.ProfileImage}>
@@ -103,23 +169,61 @@ const ProfileCard = (props) => {
           Add to Contacts
         </button>
 
-        <button onClick={onAddToContactHandler}>
+        <button>
           <IoLogoGoogle />
           Add to Google
         </button>
       </div>
       <div className={classes.Body}>
-        <div className={classes.ContactInfo}>
+        <div
+          className={classes.ContactInfo}
+          onClick={() => {
+            window.open('tel:' + contactNo);
+          }}
+        >
           <span>
             <MdOutlineLocalPhone /> Contact No
           </span>
           <p>{contactNo}</p>
         </div>
         {otherData.map((data, index) => {
+          let clickHandler = null;
+          let Icon = MdOutlineLabel;
+
+          if (data.name === 'Company') {
+            Icon = MdOutlineStore;
+          }
+
+          if (data.name === 'Email') {
+            clickHandler = composeEmail;
+            Icon = MdOutlineEmail;
+          }
+
+          if (data.name === 'Website Link') {
+            clickHandler = openWebsiteLink;
+            Icon = MdOutlineLink;
+          }
+
+          if (
+            data.value.slice(0, 4) === 'http' ||
+            data.value.slice(0, 4) === 'https'
+          ) {
+            clickHandler = openWebsiteLink;
+          }
+
           return (
-            <div className={classes.ContactInfo} key={index}>
+            <div
+              className={classes.ContactInfo}
+              key={index}
+              onClick={() => {
+                if (clickHandler) {
+                  clickHandler(data.value);
+                }
+              }}
+            >
               <span>
-                <MdOutlineLocalPhone /> {data.name}
+                <Icon />
+                {data.name}
               </span>
               <p>{data.value}</p>
             </div>

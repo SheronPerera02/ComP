@@ -1,5 +1,5 @@
-import classes from "./Layout.module.scss";
-import Header from "../Header/Header";
+import classes from './Layout.module.scss';
+import Header from '../Header/Header';
 
 const Layout = (props) => {
   return (
