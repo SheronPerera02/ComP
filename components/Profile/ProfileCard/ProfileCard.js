@@ -115,9 +115,9 @@ const ProfileCard = (props) => {
           </span>
           <p>{contactNo}</p>
         </div>
-        {otherData.map((data) => {
+        {otherData.map((data, index) => {
           return (
-            <div className={classes.ContactInfo}>
+            <div className={classes.ContactInfo} key={index}>
               <span>
                 <MdOutlineLocalPhone /> {data.name}
               </span>
