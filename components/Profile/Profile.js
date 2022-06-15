@@ -16,7 +16,7 @@ const ProfilePage = (props) => {
       <Head>
         <link rel="icon" href="/static/images/commercial_prime_logo.png" />
         <title>
-          {firstName} {lastName}'
+          {firstName} {lastName}&apos;
           {lastName && lastName.charAt(lastName.length - 1) === 's' ? '' : 's'}{' '}
           Commercial Prime Profile
         </title>
