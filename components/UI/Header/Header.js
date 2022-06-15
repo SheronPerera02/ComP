@@ -1,6 +1,6 @@
-import classes from "./Header.module.scss";
+import classes from './Header.module.scss';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 const Header = () => {
   return (
@@ -15,7 +15,17 @@ const Header = () => {
             />
           </div>
         </div>
-        <button className={classes.BtnShare}>Share</button>
+        <button
+          className={classes.BtnShare}
+          onClick={() => {
+            if (!navigator.share) return;
+            navigator.share({
+              url: 'https://www.youtube.com/',
+            });
+          }}
+        >
+          Share
+        </button>
       </div>
     </div>
   );

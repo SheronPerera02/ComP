@@ -1,11 +1,11 @@
-import classes from "./Profile.module.scss";
+import classes from './Profile.module.scss';
 
-import ProfileCard from "./ProfileCard/ProfileCard";
+import ProfileCard from './ProfileCard/ProfileCard';
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
   return (
     <div className={classes.Profile}>
-      <ProfileCard />
+      <ProfileCard profileData={props.profileData} />
     </div>
   );
 };

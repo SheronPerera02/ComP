@@ -81,22 +81,33 @@
 .ButtonContainer {
   margin-top: 1.5rem;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 
   button {
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     border: none;
     outline: none;
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
     color: white;
-    background: linear-gradient(91.3deg, #dbb659 1.61%, #a97e2a 100%);
+    // background: linear-gradient(91.3deg, #dbb659 1.61%, #a97e2a 100%);
     border-radius: 8px;
     svg {
       margin-inline-end: 0.25rem;
+    }
+
+    &:nth-child(1) {
+      width: 63%;
+      background: linear-gradient(91.3deg, #dbb659 1.61%, #a97e2a 100%);
+    }
+
+    &:nth-child(2) {
+      width: 35%;
+      background-color: #a97e2a;
     }
   }
 }
