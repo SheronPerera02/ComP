@@ -129,13 +129,13 @@ const ProfileCard = (props) => {
     window.open(url, '_blank');
   };
 
+  const gapi = useGoogleApi({
+    scopes: ['contacts'],
+  });
+
+  const auth = gapi?.auth2.getAuthInstance();
+
   const addToGoogle = () => {
-    const gapi = useGoogleApi({
-      scopes: ['contacts'],
-    });
-
-    const auth = gapi?.auth2.getAuthInstance();
-
     auth.signIn();
   };
 
