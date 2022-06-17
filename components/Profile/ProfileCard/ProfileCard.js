@@ -19,6 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import VCard from 'vcard-creator';
 import axios from 'axios';
+import { useGoogleApi } from 'react-gapi';
 
 const ProfileCard = (props) => {
   const firstName = props.profileData?.find(
@@ -129,13 +130,13 @@ const ProfileCard = (props) => {
   };
 
   const addToGoogle = () => {
-    axios
-      .post('https://people.googleapis.com/v1/people:createContact', {
-        names: [{ givenName: 'John', familyName: 'Doe' }],
-      })
-      .then(() => {
-        console.log('added');
-      });
+    const gapi = useGoogleApi({
+      scopes: ['contacts'],
+    });
+
+    const auth = gapi?.auth2.getAuthInstance();
+
+    auth.signIn();
   };
 
   return (
