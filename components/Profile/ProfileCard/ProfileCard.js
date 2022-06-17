@@ -19,7 +19,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import VCard from 'vcard-creator';
 import axios from 'axios';
-import { useGoogleApi } from 'react-gapi';
 
 const ProfileCard = (props) => {
   const firstName = props.profileData?.find(
@@ -129,15 +128,7 @@ const ProfileCard = (props) => {
     window.open(url, '_blank');
   };
 
-  const gapi = useGoogleApi({
-    scopes: ['contacts'],
-  });
-
-  const auth = gapi?.auth2.getAuthInstance();
-
-  const addToGoogle = () => {
-    auth.signIn();
-  };
+  const addToGoogle = () => {};
 
   return (
     <div className={classes.ProfileCard}>
