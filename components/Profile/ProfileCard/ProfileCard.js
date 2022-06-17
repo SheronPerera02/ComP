@@ -128,7 +128,31 @@ const ProfileCard = (props) => {
     window.open(url, '_blank');
   };
 
-  const addToGoogle = () => {};
+  const addToGoogle = () => {
+    window.gapi.client.request({
+      method: 'POST',
+      path: 'https://people.googleapis.com/v1/people:createContact',
+      datatype: 'jsonp',
+      parent: 'Name the parent',
+      body: {
+        names: [
+          {
+            givenName: 'Name to be given',
+          },
+        ],
+        emailAddresses: [
+          {
+            value: 'Email_Add to be given',
+          },
+        ],
+        phoneNumbers: [
+          {
+            value: 'phone number to be given',
+          },
+        ],
+      },
+    });
+  };
 
   return (
     <div className={classes.ProfileCard}>
