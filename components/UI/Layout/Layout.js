@@ -8,27 +8,49 @@ import { useGoogleApi } from 'react-gapi';
 
 const Layout = (props) => {
   React.useEffect(() => {
-    const SCOPE = 'https://www.googleapis.com/auth/contacts';
-    const handleClientLoad = () => window.gapi.load('client', initClient);
-    const initClient = () => {
-      const discoveryUrl =
-        'https://www.googleapis.com/discovery/v1/apis/people/v1/rest';
+    const SCOPES = 'https://www.googleapis.com/auth/contacts';
+
+    let tokenClient;
+
+    const gapiLoaded = () => {
+      window.gapi.load('client', intializeGapiClient);
+    };
+
+    const intializeGapiClient = () => {
       window.gapi.client.init({
-        clientId:
-          '958715875500-tk35h4ihh34inunpkd7l67cn110nt1ge.apps.googleusercontent.com',
-        discoveryDocs: [discoveryUrl],
-        scope: SCOPE,
+        apiKey: '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',
+        discoveryDocs: [
+          'https://www.googleapis.com/discovery/v1/apis/people/v1/rest',
+        ],
       });
+
       console.log('Google loaded');
     };
-    const script = document.createElement('script');
-    script.src = 'https://apis.google.com/js/api.js';
-    script.async = true;
-    script.defer = true;
-    script.onload = handleClientLoad;
-    document.body.appendChild(script);
+
+    const gisLoaded = () => {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id:
+          '958715875500-tk35h4ihh34inunpkd7l67cn110nt1ge.apps.googleusercontent.com',
+        scope: SCOPES,
+        callback: '', // defined later
+      });
+    };
+    const script1 = document.createElement('script');
+    script1.src = 'https://apis.google.com/js/api.js';
+    script1.async = true;
+    script1.defer = true;
+    script1.onload = gapiLoaded;
+    document.body.appendChild(script1);
+
+    const script2 = document.createElement('script');
+    script2.src = 'https://accounts.google.com/gsi/client';
+    script2.async = true;
+    script2.defer = true;
+    script2.onload = gisLoaded;
+    document.body.appendChild(script2);
     return () => {
-      document.body.removeChild(script);
+      document.body.removeChild(script1);
+      document.body.removeChild(script2);
     };
   });
 
