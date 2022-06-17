@@ -9,7 +9,7 @@ import { useGoogleApi } from 'react-gapi';
 const Layout = (props) => {
   React.useEffect(() => {
     const SCOPE = 'https://www.googleapis.com/auth/contacts';
-    const handleClientLoad = () => window.gapi.load('client:auth2', initClient);
+    const handleClientLoad = () => window.gapi.load('client', initClient);
     const initClient = () => {
       const discoveryUrl =
         'https://www.googleapis.com/discovery/v1/apis/people/v1/rest';
