@@ -9,10 +9,10 @@ const Layout = (props) => {
     const handleClientLoad = () => window.gapi.load('client:auth2', initClient);
 
     const initClient = () => {
-      const discoveryUrl = 'TODO: your discoveryUrl here';
+      const discoveryUrl = 'https://accounts.google.com/o/oauth2/auth';
       window.gapi.client.init({
         clientId: '958715875500-tk35h4ihh34inunpkd7l67cn110nt1ge.apps.googleusercontent.com',
-        // discoveryDocs: [discoveryUrl],
+        discoveryDocs: [discoveryUrl],
         scope: SCOPE,
       });
       console.log('Google loaded');
