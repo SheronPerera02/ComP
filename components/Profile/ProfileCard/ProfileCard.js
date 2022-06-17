@@ -18,6 +18,7 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import VCard from 'vcard-creator';
+import axios from 'axios';
 
 const ProfileCard = (props) => {
   const firstName = props.profileData?.find(
@@ -127,6 +128,16 @@ const ProfileCard = (props) => {
     window.open(url, '_blank');
   };
 
+  const addToGoogle = () => {
+    axios
+      .post('https://people.googleapis.com/v1/people:createContact', {
+        names: [{ givenName: 'John', familyName: 'Doe' }],
+      })
+      .then(() => {
+        console.log('added');
+      });
+  };
+
   return (
     <div className={classes.ProfileCard}>
       <ToastContainer />
@@ -169,7 +180,7 @@ const ProfileCard = (props) => {
           Add to Contacts
         </button>
 
-        <button>
+        <button onClick={addToGoogle}>
           <IoLogoGoogle />
           Add to Google
         </button>

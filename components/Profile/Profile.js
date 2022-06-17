@@ -17,9 +17,12 @@ const ProfilePage = (props) => {
         <link rel="icon" href="/static/images/commercial_prime_logo.png" />
         <title>
           {firstName} {lastName}&apos;
-          {lastName && lastName.charAt(lastName.length - 1) === 's' ? '' : 's'}{' '}
+          {lastName && lastName.charAt(lastName.length - 1) === 's'
+            ? ''
+            : 's'}{' '}
           Commercial Prime Profile
         </title>
+        <meta name="theme-color" content="#2d2d2d" />
       </Head>
       <ProfileCard profileData={props.profileData} />
     </div>
