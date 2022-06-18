@@ -1,16 +1,12 @@
 import React from 'react';
 import classes from './Layout.module.scss';
 import Header from '../Header/Header';
-import axios from 'axios';
-import { useGoogleApi } from 'react-gapi';
 
 // https://www.googleapis.com/auth/contacts
 
 const Layout = (props) => {
   React.useEffect(() => {
     const SCOPES = 'https://www.googleapis.com/auth/contacts';
-
-    let tokenClient;
 
     const gapiLoaded = () => {
       window.gapi.load('client', intializeGapiClient);
