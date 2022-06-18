@@ -175,7 +175,6 @@ const ProfileCard = (props) => {
   };
 
   const create = () => {
-    console.log('creating');
     // window.gapi.client.people.people.createContact({
     //   parent: 'people/me',
 
@@ -205,24 +204,24 @@ const ProfileCard = (props) => {
       body: {
         names: [
           {
-            givenName: 'Jo#',
+            givenName: 'TestPerson',
           },
         ],
         emailAddresses: [
           {
-            value: 'jo#@gmail.com',
+            value: 'test@gmail.com',
           },
         ],
         phoneNumbers: [
           {
-            value: '0774426677',
+            value: '0771231234',
           },
         ],
       },
     });
 
     req.execute(() => {
-      console.log('done');
+      console.log('Created!');
     });
   };
 
