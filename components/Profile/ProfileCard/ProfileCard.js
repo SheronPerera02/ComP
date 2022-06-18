@@ -134,7 +134,7 @@ const ProfileCard = (props) => {
         throw resp;
       }
 
-      create();
+      listConnectionNames();
     };
 
     if (gapi.client.getToken() === null) {
