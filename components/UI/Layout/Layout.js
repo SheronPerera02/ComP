@@ -18,7 +18,7 @@ const Layout = (props) => {
 
     const intializeGapiClient = () => {
       window.gapi.client.init({
-        apiKey: 'flowing-mantis-353621',
+        apiKey: 'AIzaSyAkMirwzdSwU-0Ng1D11l5rpFaMxCf780k',
         discoveryDocs: [
           'https://www.googleapis.com/discovery/v1/apis/people/v1/rest',
         ],
