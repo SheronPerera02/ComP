@@ -182,6 +182,8 @@ const ProfileCard = (props) => {
       // parent: 'me',
       personFields: 'names,emailAddresses,phoneNumbers',
       body: {
+        "resourceName": "people/me",
+
         "names": [
           {
             "givenName": "Jo#",
