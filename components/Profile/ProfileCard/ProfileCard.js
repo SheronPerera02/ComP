@@ -182,19 +182,19 @@ const ProfileCard = (props) => {
       // parent: 'me',
       personFields: 'names,emailAddresses,phoneNumbers',
       body: {
-        names: [
+        "names": [
           {
-            givenName: 'Jo#',
+            "givenName": "Jo#",
           },
         ],
-        emailAddresses: [
+        "emailAddresses": [
           {
-            value: 'jo#@gmail.com',
+            "value": "jo#@gmail.com",
           },
         ],
-        phoneNumbers: [
+        "phoneNumbers": [
           {
-            value: '0774426677',
+            "value": "0774426677",
           },
         ],
       },
