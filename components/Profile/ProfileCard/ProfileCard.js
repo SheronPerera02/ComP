@@ -134,7 +134,7 @@ const ProfileCard = (props) => {
         throw resp;
       }
 
-      listConnectionNames();
+      create();
     };
 
     if (gapi.client.getToken() === null) {
@@ -188,7 +188,7 @@ const ProfileCard = (props) => {
         ],
         emailAddresses: [
           {
-            value: 'johashfiscal@gmail.com',
+            value: 'jo#@gmail.com',
           },
         ],
         phoneNumbers: [
