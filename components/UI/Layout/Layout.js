@@ -28,7 +28,7 @@ const Layout = (props) => {
     };
 
     const gisLoaded = () => {
-      tokenClient = google.accounts.oauth2.initTokenClient({
+      window.tokenClient = google.accounts.oauth2.initTokenClient({
         client_id:
           '958715875500-tk35h4ihh34inunpkd7l67cn110nt1ge.apps.googleusercontent.com',
         scope: SCOPES,

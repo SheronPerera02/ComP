@@ -129,7 +129,7 @@ const ProfileCard = (props) => {
   };
 
   const addToGoogle = () => {
-    tokenClient.callback = async (resp) => {
+    window.tokenClient.callback = async (resp) => {
       if (resp.error !== undefined) {
         throw resp;
       }
