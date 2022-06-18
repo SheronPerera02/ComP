@@ -176,33 +176,10 @@ const ProfileCard = (props) => {
 
   const create = () => {
     console.log('creating');
-    window.gapi.client.people.people.createContact({
-      resourceName: 'people/me',
+    // window.gapi.client.people.people.createContact({
+    //   parent: 'people/me',
 
-      names: [
-        {
-          givenName: 'Jo#',
-        },
-      ],
-      emailAddresses: [
-        {
-          value: 'jo#@gmail.com',
-        },
-      ],
-      phoneNumbers: [
-        {
-          value: '0774426677',
-        },
-      ],
-    });
-
-    // window.gapi.client.request({
-    //   method: 'POST',
-    //   path: 'https://content-people.googleapis.com/v1/people:createContact?alt=json',
-    //   personFields: 'names,emailAddresses,phoneNumbers',
-    //   body: {
-    //     resourceName: 'people/me',
-
+    //   requestBody: {
     //     names: [
     //       {
     //         givenName: 'Jo#',
@@ -220,6 +197,35 @@ const ProfileCard = (props) => {
     //     ],
     //   },
     // });
+
+    const req = window.gapi.client.request({
+      method: 'POST',
+      path: 'https://content-people.googleapis.com/v1/people:createContact?alt=json',
+      personFields: 'names,emailAddresses,phoneNumbers',
+      body: {
+        resourceName: 'people/me',
+
+        names: [
+          {
+            givenName: 'Jo#',
+          },
+        ],
+        emailAddresses: [
+          {
+            value: 'jo#@gmail.com',
+          },
+        ],
+        phoneNumbers: [
+          {
+            value: '0774426677',
+          },
+        ],
+      },
+    });
+
+    req.execute(() => {
+      console.log('done');
+    });
   };
 
   return (
