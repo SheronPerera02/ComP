@@ -177,26 +177,24 @@ const ProfileCard = (props) => {
   const create = () => {
     window.gapi.client.request({
       method: 'POST',
-      path: 'https://people.googleapis.com/v1/people:createContact',
-      datatype: 'jsonp',
-      parent: 'me',
+      path: 'https://people.googleapis.com/v1/people:createContact?alt=json',
       personFields: 'names,emailAddresses,phoneNumbers',
       body: {
-        "resourceName": "people/me",
+        resourceName: 'people/me',
 
-        "names": [
+        names: [
           {
-            "givenName": "Jo#",
+            givenName: 'Jo#',
           },
         ],
-        "emailAddresses": [
+        emailAddresses: [
           {
-            "value": "jo#@gmail.com",
+            value: 'jo#@gmail.com',
           },
         ],
-        "phoneNumbers": [
+        phoneNumbers: [
           {
-            "value": "0774426677",
+            value: '0774426677',
           },
         ],
       },
