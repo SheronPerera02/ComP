@@ -175,6 +175,7 @@ const ProfileCard = (props) => {
   };
 
   const create = () => {
+    return console.log(window.gapi.client);
     window.gapi.client.request({
       method: 'POST',
       path: 'https://content-people.googleapis.com/v1/people:createContact?alt=json',
