@@ -147,14 +147,14 @@ const ProfileCard = (props) => {
     }
   };
 
-  const listConnectionNames  =() =>{
+  const listConnectionNames = async () => {
     let response;
     try {
       // Fetch first 10 files
       response = await gapi.client.people.people.connections.list({
-        'resourceName': 'people/me',
-        'pageSize': 10,
-        'personFields': 'names,emailAddresses',
+        resourceName: 'people/me',
+        pageSize: 10,
+        personFields: 'names,emailAddresses',
       });
     } catch (err) {
       document.getElementById('content').innerText = err.message;
@@ -166,16 +166,14 @@ const ProfileCard = (props) => {
       return;
     }
     // Flatten to string to display
-    const output = connections.reduce(
-        (str, person) => {
-          if (!person.names || person.names.length === 0) {
-            return `${str}Missing display name\n`;
-          }
-          return `${str}${person.names[0].displayName}\n`;
-        },
-        'Connections:\n');
+    const output = connections.reduce((str, person) => {
+      if (!person.names || person.names.length === 0) {
+        return `${str}Missing display name\n`;
+      }
+      return `${str}${person.names[0].displayName}\n`;
+    }, 'Connections:\n');
     console.log(output);
-  }
+  };
 
   const create = () => {
     window.gapi.client.request({
