@@ -175,6 +175,7 @@ const ProfileCard = (props) => {
   };
 
   const create = () => {
+    console.log('creating');
     window.gapi.client.people.people.createContact({
       resourceName: 'people/me',
 
