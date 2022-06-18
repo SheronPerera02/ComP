@@ -180,6 +180,7 @@ const ProfileCard = (props) => {
       path: 'https://people.googleapis.com/v1/people:createContact',
       // datatype: 'jsonp',
       // parent: 'me',
+      personFields: 'names,emailAddresses,phoneNumbers',
       body: {
         names: [
           {
