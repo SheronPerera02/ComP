@@ -154,7 +154,7 @@ const ProfileCard = (props) => {
       response = await gapi.client.people.people.connections.list({
         resourceName: 'people/me',
         pageSize: 10,
-        // personFields: 'names,emailAddresses',
+        personFields: 'names,emailAddresses,phoneNumbers',
       });
     } catch (err) {
       return;
