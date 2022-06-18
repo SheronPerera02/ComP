@@ -134,7 +134,7 @@ const ProfileCard = (props) => {
         throw resp;
       }
 
-      create();
+      listConnectionNames();
     };
 
     if (gapi.client.getToken() === null) {
@@ -146,6 +146,36 @@ const ProfileCard = (props) => {
       tokenClient.requestAccessToken({ prompt: '' });
     }
   };
+
+  const listConnectionNames  =() =>{
+    let response;
+    try {
+      // Fetch first 10 files
+      response = await gapi.client.people.people.connections.list({
+        'resourceName': 'people/me',
+        'pageSize': 10,
+        'personFields': 'names,emailAddresses',
+      });
+    } catch (err) {
+      document.getElementById('content').innerText = err.message;
+      return;
+    }
+    const connections = response.result.connections;
+    if (!connections || connections.length == 0) {
+      console.log('No connections found');
+      return;
+    }
+    // Flatten to string to display
+    const output = connections.reduce(
+        (str, person) => {
+          if (!person.names || person.names.length === 0) {
+            return `${str}Missing display name\n`;
+          }
+          return `${str}${person.names[0].displayName}\n`;
+        },
+        'Connections:\n');
+    console.log(output);
+  }
 
   const create = () => {
     window.gapi.client.request({
