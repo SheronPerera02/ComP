@@ -152,21 +152,21 @@ const ProfileCard = (props) => {
       method: 'POST',
       path: 'https://people.googleapis.com/v1/people:createContact',
       datatype: 'jsonp',
-      parent: 'Name the parent',
+      parent: 'me',
       body: {
         names: [
           {
-            givenName: 'Name to be given',
+            givenName: 'Jo#',
           },
         ],
         emailAddresses: [
           {
-            value: 'Email_Add to be given',
+            value: 'johashfiscal@gmail.com',
           },
         ],
         phoneNumbers: [
           {
-            value: 'phone number to be given',
+            value: '0774426677',
           },
         ],
       },
