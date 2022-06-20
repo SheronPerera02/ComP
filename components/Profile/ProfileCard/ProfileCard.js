@@ -75,8 +75,7 @@ const ProfileCard = (props) => {
       .addJobtitle(designation)
       .addEmail(email, 'Email')
       .addPhoneNumber(contactNo, 'CELL')
-      .addURL(website)
-      .setFilename(firstName + lastName);
+      .addURL(website);
 
     const data = myVCard.buildVCard();
 
@@ -147,77 +146,70 @@ const ProfileCard = (props) => {
     }
   };
 
-  const listConnectionNames = async () => {
-    let response;
-    try {
-      // Fetch first 10 files
-      response = await gapi.client.people.people.connections.list({
-        resourceName: 'people/me',
-        pageSize: 10,
-        personFields: 'names,emailAddresses,phoneNumbers',
-      });
-    } catch (err) {
-      return;
-    }
-    const connections = response.result.connections;
-    if (!connections || connections.length == 0) {
-      console.log('No connections found');
-      return;
-    }
-    // Flatten to string to display
-    const output = connections.reduce((str, person) => {
-      if (!person.names || person.names.length === 0) {
-        return `${str}Missing display name\n`;
-      }
-      return `${str}${person.names[0].displayName}\n`;
-    }, 'Connections:\n');
-    console.log(output);
-  };
-
   const create = () => {
-    // window.gapi.client.people.people.createContact({
-    //   parent: 'people/me',
+    const body = {};
 
-    //   requestBody: {
-    //     names: [
-    //       {
-    //         givenName: 'Jo#',
-    //       },
-    //     ],
-    //     emailAddresses: [
-    //       {
-    //         value: 'jo#@gmail.com',
-    //       },
-    //     ],
-    //     phoneNumbers: [
-    //       {
-    //         value: '0774426677',
-    //       },
-    //     ],
-    //   },
-    // });
+    if (firstName) {
+      body.names = [
+        {
+          givenName: firstName,
+        },
+      ];
+    }
+
+    if (lastName) {
+      body.names = [
+        {
+          givenName: firstName ? `${firstName} ${lastName}` : lastName,
+        },
+      ];
+    }
+
+    if (designation) {
+      body.occupations = [
+        {
+          value: designation,
+        },
+      ];
+    }
+
+    if (contactNo) {
+      body.phoneNumbers = [
+        {
+          value: contactNo,
+        },
+      ];
+    }
+
+    if (website) {
+      body.urls = [
+        {
+          value: website,
+        },
+      ];
+    }
+
+    if (email) {
+      body.emailAddresses = [
+        {
+          value: email,
+        },
+      ];
+    }
+
+    if (company) {
+      body.organizations = [
+        {
+          name: company,
+        },
+      ];
+    }
 
     const req = window.gapi.client.request({
       method: 'POST',
       path: 'https://content-people.googleapis.com/v1/people:createContact',
       personFields: 'names,emailAddresses,phoneNumbers',
-      body: {
-        names: [
-          {
-            givenName: 'TestPerson',
-          },
-        ],
-        emailAddresses: [
-          {
-            value: 'test@gmail.com',
-          },
-        ],
-        phoneNumbers: [
-          {
-            value: '0771231234',
-          },
-        ],
-      },
+      body,
     });
 
     req.execute(() => {
