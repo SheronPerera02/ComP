@@ -7,17 +7,17 @@ const HomePage = (props) => {
 
 export const getServerSideProps = async (ctx) => {
   try {
-    const res = await axios.post('vcard-service/get-contact-info', null, {
+    const res = await axios.get('vcard-service/get-contact-info', {
       params: { link: 'qanq' },
     });
 
     return {
       props: {
-        data: res.data.data,
+        data: !res.data.data ? [] : res.data.data,
       },
     };
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
 
     return {
       props: {

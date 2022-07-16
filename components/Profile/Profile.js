@@ -3,13 +3,19 @@ import classes from './Profile.module.scss';
 import ProfileCard from './ProfileCard/ProfileCard';
 
 const ProfilePage = (props) => {
-  const firstName = props.profileData?.find(
-    (data) => data.name === 'First Name'
-  ).value;
+  let firstName = '';
 
-  const lastName = props.profileData?.find(
-    (data) => data.name === 'Last Name'
-  ).value;
+  let lastName = '';
+
+  if (props.profileData && props.profileData.length > 0) {
+    firstName = props.profileData?.find(
+      (data) => data.name === 'First Name'
+    ).value;
+
+    lastName = props.profileData?.find(
+      (data) => data.name === 'Last Name'
+    ).value;
+  }
 
   return (
     <div className={classes.Profile}>

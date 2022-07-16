@@ -21,31 +21,19 @@ import VCard from 'vcard-creator';
 import axios from 'axios';
 
 const ProfileCard = (props) => {
-  const firstName = props.profileData?.find(
-    (data) => data.name === 'First Name'
-  ).value;
+  let firstName = null;
 
-  const lastName = props.profileData?.find(
-    (data) => data.name === 'Last Name'
-  ).value;
+  let lastName = null;
 
-  const designation = props.profileData?.find(
-    (data) => data.name === 'Designation'
-  ).value;
+  let designation = null;
 
-  const contactNo = props.profileData?.find(
-    (data) => data.name === 'Contact Number'
-  ).value;
+  let contactNo = null;
 
-  const website = props.profileData?.find(
-    (data) => data.name === 'Website Link'
-  ).value;
+  let website = null;
 
-  const email = props.profileData?.find((data) => data.name === 'Email').value;
+  let email = null;
 
-  const company = props.profileData?.find(
-    (data) => data.name === 'Company'
-  ).value;
+  let company = null;
 
   const leaveOutFields = [
     'First Name',
@@ -54,17 +42,45 @@ const ProfileCard = (props) => {
     'Contact Number',
   ];
 
-  const otherData = props.profileData?.filter((data) => {
-    let addField = true;
+  let otherData = [];
 
-    leaveOutFields.forEach((field) => {
-      if (field === data.name) {
-        addField = false;
-      }
+  if (props.profileData && props.profileData.length > 0) {
+    firstName = props.profileData.find(
+      (data) => data.name === 'First Name'
+    ).value;
+
+    lastName = props.profileData.find(
+      (data) => data.name === 'Last Name'
+    ).value;
+
+    designation = props.profileData.find(
+      (data) => data.name === 'Designation'
+    ).value;
+
+    contactNo = props.profileData.find(
+      (data) => data.name === 'Contact Number'
+    ).value;
+
+    website = props.profileData.find(
+      (data) => data.name === 'Website Link'
+    ).value;
+
+    email = props.profileData.find((data) => data.name === 'Email').value;
+
+    company = props.profileData.find((data) => data.name === 'Company').value;
+
+    otherData = props.profileData.filter((data) => {
+      let addField = true;
+
+      leaveOutFields.forEach((field) => {
+        if (field === data.name) {
+          addField = false;
+        }
+      });
+
+      return addField;
     });
-
-    return addField;
-  });
+  }
 
   const onAddToContactHandler = () => {
     const myVCard = new VCard();
@@ -276,7 +292,7 @@ const ProfileCard = (props) => {
           </span>
           <p>{contactNo}</p>
         </div>
-        {otherData.map((data, index) => {
+        {/* {otherData.map((data, index) => {
           let clickHandler = null;
           let Icon = MdOutlineLabel;
 
@@ -318,7 +334,7 @@ const ProfileCard = (props) => {
               <p>{data.value}</p>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );
